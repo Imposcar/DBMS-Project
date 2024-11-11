@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script defer src="{{ url_for('static', filename='script.js') }}"></script>
+    <title>{{ category }} - Virtual Pantry</title>
+</head>
+<body>
+    <h2>{{ category }} Items</h2>
+    
+    <!-- Search bar for filtering items within the category -->
+    <form id="searchForm" action="{{ url_for('search') }}" method="POST">
+        <input type="text" id="searchInput" name="search_query" placeholder="Search within {{ category }}...">
+        <button type="submit">Search</button>
+    </form>
+    <div id="searchResults"></div>  <!-- Display search results here -->
+
+    <!-- Display list of items in the selected category -->
+    <div id="itemList">
+        <ul>
+            {% for item in items %}
+                <li>
+                    <strong>{{ item.food_name }}</strong> - Price: ${{ item.food_price }} - Stock: {{ item.food_stockquantity }}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <!-- Back button to return to home page -->
+    <p><a href="{{ url_for('home') }}">Back to Categories</a></p>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script defer src="{{ url_for('static', filename='script.js') }}"></script>
+    <title>Home</title>
+</head>
+<body>
+    <h2>Welcome, {{ current_user.username }}</h2>
+    <form id="searchForm" action="{{ url_for('search') }}" method="POST">
+        <input type="text" id="searchInput" name="search_query" placeholder="Search for food items...">
+        <button type="submit">Search</button>
+    </form>
+    <div id="searchResults"></div>  <!-- Display search results here -->
+    <h3>Categories:</h3>
+    <ul>
+        {% for category in categories %}
+            <li><a href="{{ url_for('category', category=category[0]) }}">{{ category[0] }}</a></li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
